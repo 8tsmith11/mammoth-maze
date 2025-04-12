@@ -38,6 +38,7 @@ public class Game {
         InputHandler input = new InputHandler();	
 
 		SoundPlayer footstepSound = new SoundPlayer("footsteps.wav");
+		SoundPlayer impactSound = new SoundPlayer("impact.wav");
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice gd = ge.getDefaultScreenDevice();
 		Frame frame = new Frame(gd.getDefaultConfiguration());
