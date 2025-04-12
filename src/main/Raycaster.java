@@ -18,8 +18,6 @@ public class Raycaster {
 	}
 	
 	public void castRays() {
-		for (int i = 0; i < rays.length; i++) {
-			double angle = 
-		}
+		
 	}
 }
