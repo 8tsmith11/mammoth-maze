@@ -77,7 +77,7 @@ public class Player {
         if (tileX < 0 || tileY < 0 || tileX >= map.length || tileY >= map[0].length) {
             return false;
         }
-        return map[tileY][tileX] == 0;
+        return map[tileY][tileX] != 1;
     }
 
     // Return angle in radians
