@@ -23,13 +23,14 @@ public class Game {
 
 		World world = new World(map);
 		Player player = new Player(world);
+		Raycaster raycaster = new Raycaster(player, world.getMap());
 		
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = screenSize.width;
 		int height = screenSize.height;
 		RaycastView raycastView = new RaycastView(world, player, width / 2, 0, width / 
 				2, height);
-		TopDownView topdownView = new TopDownView(world, player, 0, 0, width / 
+		TopDownView topdownView = new TopDownView(world, player, raycaster, 0, 0, width / 
 				2, height);
 		
 		// Input handler
@@ -65,6 +66,8 @@ public class Game {
             long now = System.nanoTime();
             double deltaTime = (now - lastTime) / 1_000_000_000.0;
             lastTime = now;
+            
+            raycaster.castRays();
 
             // Movement input
             if (input.isKeyDown(KeyEvent.VK_W)) {

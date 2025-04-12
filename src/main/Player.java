@@ -82,7 +82,7 @@ public class Player {
 
     // Return angle in radians
     public double getAngle() {
-    	return Math.atan(dirY / dirX);
+    	return Math.atan2(dirY, dirX);
     }
 
 
