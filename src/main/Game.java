@@ -89,6 +89,16 @@ public class Game {
             topdownView.repaint();
             raycastView.repaint();
 
+            // pranav
+            if (world.getMap()[(int)player.y][(int)player.x] == 2) {
+        		MazeGen.initMaze();
+    			MazeGen.generateMaze(1, 1);
+    			map = MazeGen.maze;
+    			player.x = 1.5;
+    			player.y = 1.5;
+            }
+            	
+            
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {
