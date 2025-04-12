@@ -70,13 +70,13 @@ public class Player {
 
     private boolean isWalkable(double nextX, double nextY) {
         int[][] map = world.getMap();
-        int tileX = (int) nextX;
-        int tileY = (int) nextY;
+        int tileX = (int) Math.floor(nextX);
+        int tileY = (int) Math.floor(nextY);
 
         if (tileX < 0 || tileY < 0 || tileX >= map.length || tileY >= map[0].length) {
             return false;
         }
-        return map[tileX][tileY] == 0;
+        return map[tileY][tileX] == 0;
     }
 
     // Return angle in radians
