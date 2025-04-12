@@ -14,20 +14,6 @@ public class Player {
 
     private World world;
 
-    // long lastTime = System.nanoTime();
-    // double deltaTime;
-
-    // while (running) {
-    //     long now = System.nanoTime();
-    //     deltaTime = (now - lastTime) / 1_000_000_000.0; // convert to seconds
-    //     lastTime = now;
-    
-    //     // Pass deltaTime to player movement
-    //     handleInput(deltaTime);
-    //     updateGame(deltaTime);
-    //     render();
-    // }
-
     public Player(World world) {
 
         this.world = world;
@@ -97,5 +83,13 @@ public class Player {
     public double getAngle() {
     	return Math.atan(dirY / dirX);
     }
+
+
+    public double getX() { return x; }
+    public double getY() { return y; }
+    public double getDirX() { return dirX; }
+    public double getDirY() { return dirY; }
+
+
 
 }
