@@ -22,15 +22,14 @@ public class TopDownView extends Canvas {
 		Graphics g2 = g.create();
 		g2.translate(this.x, this.y);
 		
-		// set cellSize using width/2 or height of screen depending on which is larger
-		int cellSize = ((this.width > this.height) ? this.width : this.height) 
-			/ this.map.length;
+		// set cellSize using width or height of screen depending on which is larger
+		int cellSize = ((this.width < this.height) ? this.width : this.height) / this.map.length;
 		
-		for (int row = 0; row < this.map.length; row++ ) {
-			for (int col = 0; col < this.map[row].length; col++ ) {
-				g2.setColor((this.map[row][col] == 0) ? Color.white : 
+		for (int row = 0; row < this.map.length; row++) {
+			for (int col = 0; col < this.map[row].length; col++) {
+				g2.setColor((this.map[row][col] == 0) ? Color.yellow : 
 					Color.black);
-				g2.fillRect(row * cellSize, col * cellSize, cellSize, cellSize);
+				g2.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
 			}
 		}
         

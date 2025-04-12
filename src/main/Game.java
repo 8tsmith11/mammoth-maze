@@ -10,6 +10,7 @@ public class Game {
 		int[][] map = {
 	            {1, 0, 0, 0},
 	            {1, 0, 1, 0},
+	            {1, 0, 0, 1},
 	            {1, 1, 1, 1}
 	        };
 		World world = new World(map);
