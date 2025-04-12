@@ -10,12 +10,16 @@ public class Game {
 	
 	public static void main(String[] args) {
 		
-		int[][] map = {
-	            {1, 0, 0, 0},
-	            {1, 0, 1, 0},
-	            {1, 0, 0, 1},
-	            {1, 1, 1, 1}
-	    };
+//		int[][] map = {
+//	            {1, 0, 0, 0},
+//	            {1, 0, 1, 0},
+//	            {1, 0, 0, 1},
+//	            {1, 1, 1, 1}
+//	    };
+		
+		MazeGen.initMaze();
+		MazeGen.generateMaze(1, 1);
+		int[][] map = MazeGen.maze;
 
 		World world = new World(map);
 		Player player = new Player(world);

@@ -6,15 +6,15 @@ import java.util.*;
 public class MazeGen {
 	
 	// just set random numbers for width and height, can change later
-	private static final int WIDTH = 31;
-	private static final int HEIGHT = 31;
+	private static final int WIDTH = 15;
+	private static final int HEIGHT = 15;
 	
 	private static final int WALL = 1;
 	private static final int SPACE = 0;
 	
 	private static final Random random = new Random();
 	
-	private static int[][] maze = new int[HEIGHT][WIDTH];
+	public static int[][] maze = new int[HEIGHT][WIDTH];
 	
 	
 	public static void generateMaze(int x, int y ) {

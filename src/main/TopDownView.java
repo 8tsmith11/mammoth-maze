@@ -47,7 +47,8 @@ public class TopDownView extends Canvas {
 
 		// Draw Player
 		g2.setColor(Color.BLUE);
-		g2.fillOval((int)(player.x * cellSize - 25), (int)(player.y * cellSize - 25), 50, 50);
+		int s = (int) (Player.SIZE * cellSize); // Player size in pixels
+		g2.fillOval((int)(player.x * cellSize - s / 2), (int)(player.y * cellSize - s / 2), s, s);
 		
 		// Player Direction Indicator
 		g2.setStroke(new BasicStroke(10));
