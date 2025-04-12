@@ -3,9 +3,9 @@ package main;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 
 public class RaycastView extends Canvas {
+	private static final long serialVersionUID = 1L;
 	private int[][] map;
 	private int xOffset, yOffset; // Position of view
 	
