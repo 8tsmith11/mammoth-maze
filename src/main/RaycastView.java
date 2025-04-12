@@ -43,15 +43,15 @@ public class RaycastView extends Canvas {
 					((ray.y2 - ray.y1) * (ray.y2 - ray.y1)));
 			
 			// Perpendicular Distance to correct for fish-eye effect
-			double angle = Math.toRadians(-rays.length / 2 + i);
+			double angle = player.getAngle() - Math.toRadians(rays.length / 2) + Math.toRadians(i);
 			double pd = d * Math.cos(angle - player.getAngle());
 			
-			int wallHeight = (int)(getHeight() / d); // Height of wall segment in pixels
+			int wallHeight = (int)(getHeight() / pd); // Height of wall segment in pixels
 			
 			int top = Math.max(0, getHeight() / 2 - wallHeight / 2);
 			
 			// Walls get darker with distance
-			int shade = Math.max(0, 255 - (int)(d * 50));
+			int shade = Math.max(0, 255 - (int)(pd * 80));
 			g.setColor(new Color(shade, 0, 0));
 
 			g.fillRect(i * wallWidth, top, wallWidth, wallHeight);

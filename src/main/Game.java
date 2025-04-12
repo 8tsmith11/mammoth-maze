@@ -23,13 +23,14 @@ public class Game {
 
 		World world = new World(map);
 		Player player = new Player(world);
+		Mammoth mammoth = new Mammoth(world, player, map[0].length - 2, map.length - 2);
 		Raycaster raycaster = new Raycaster(player, world.getMap());
 		
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = screenSize.width;
 		int height = screenSize.height;
 		RaycastView raycastView = new RaycastView(world, player, raycaster);
-		TopDownView topdownView = new TopDownView(world, player, raycaster, 0, 0, width / 
+		TopDownView topdownView = new TopDownView(world, player, mammoth, raycaster, 0, 0, width / 
 				2, height);
 		
 		// Input handler
