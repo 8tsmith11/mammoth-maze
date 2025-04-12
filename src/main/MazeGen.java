@@ -14,15 +14,14 @@ public class MazeGen {
 	
 	private static final Random random = new Random();
 	
-	private static int[][] maze = new int[HEIGHT][WIDTH];
-	
+	public static int[][] maze = new int[HEIGHT][WIDTH];
 	
 	public static void generateMaze(int x, int y ) {
 	
 		// mark the current cell as visited
 		maze[y][x] = SPACE;
 		
-		// up right down left
+		// random direction (up right down left)
 		int[][] directions = { {0, -2}, {2, 0}, {0, 2}, {-2, 0} };
 		
 		shuffleArray(directions);
@@ -32,7 +31,7 @@ public class MazeGen {
 			int nx = x + dir[0];
 			int ny = y + dir[1];
 			
-			if (inBounds(nx, ny) && (maze[ny][nx] == 1)) {
+			if (inBounds(nx, ny) && (maze[ny][nx] != 0)) {
 				maze[y + dir[1] / 2][x + dir[0] / 2] = SPACE;
 				generateMaze(nx, ny);
 			}
@@ -77,9 +76,42 @@ public class MazeGen {
 		}
 			
 	}
+	
+	// can randomly generate a number of extra paths 
+	// between 1 and 20 using random
+	public static void addMorePaths(int numRemoveWalls) {
+		int count = 0;
+		
+		while (count < numRemoveWalls) {
+			int x = random.nextInt(WIDTH / 2) * 2 + 1;
+			int y = random.nextInt(HEIGHT / 2) * 2 + 1;
+			
+			int[][] directions = { {0, -2}, {2, 0}, {0, 2}, {-2, 0} };
+			
+			int dir[] = directions[random.nextInt(4)];
+			
+			int nx = x + dir[0];
+			int ny = y + dir[1];
+			
+			// may need to change the equal to 1 instead of 0
+			if (inBounds(nx, ny) && (maze[ny][nx] == 0)) {
+				int wallX = x + dir[0] / 2;
+				int wallY = y + dir[1] / 2;
+				
+				if (maze[wallY][wallX] != 0) {
+					maze[wallY][wallX] = 0;
+					count++;
+					
+				}
+			}
+		}
+		
+	}
 
 	
-	
+	public static void setPortal() {
+		maze[HEIGHT - 2][WIDTH - 1] = 2;
+	}
 	
 	
 	
