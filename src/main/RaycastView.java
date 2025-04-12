@@ -2,7 +2,6 @@ package main;
 
 import java.awt.Canvas;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 
 public class RaycastView extends Canvas {
@@ -10,7 +9,6 @@ public class RaycastView extends Canvas {
 	private int[][] map;
 	private int x, y; // Position of view
 	private int width, height; // Size of view
-	private Dimension screenSize;
 	
 	public RaycastView(World world, int x, int y, int width, int height) {
 		map = world.getMap();
