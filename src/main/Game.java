@@ -14,19 +14,23 @@ public class Game {
 	            {1, 1, 1, 1}
 	        };
 		World world = new World(map);
+		Player player = new Player(world);
+		
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = screenSize.width;
 		int height = screenSize.height;
-		RaycastView raycastView = new RaycastView(world, width / 2, 0, width / 
+		RaycastView raycastView = new RaycastView(world, player, width / 2, 0, width / 
 				2, height);
-		TopDownView topdownView = new TopDownView(world, 0, 0, width / 
+		TopDownView topdownView = new TopDownView(world, player, 0, 0, width / 
 				2, height);
 		
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice gd = ge.getDefaultScreenDevice();
 		Frame frame = new Frame(gd.getDefaultConfiguration());
+		
 		frame.add(raycastView);
 		frame.add(topdownView);
+		
 		frame.setUndecorated(true); // No window decorations
 		gd.setFullScreenWindow(frame);
 		frame.setVisible(true);

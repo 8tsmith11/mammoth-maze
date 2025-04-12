@@ -5,12 +5,14 @@ import java.awt.*;
 public class TopDownView extends Canvas {
 	private static final long serialVersionUID = 1L;
 	private int[][] map;
+	private Player player;
 	private int x, y; // Position of view
 	private int width, height; // Size of view
 	private Dimension screenSize;
 
-	public TopDownView(World world, int x, int y, int width, int height) {
+	public TopDownView(World world, Player p, int x, int y, int width, int height) {
 		map = world.getMap();
+		player = p;
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -35,8 +37,16 @@ public class TopDownView extends Canvas {
 				g2.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
 				
 				// Border around each cell
-				g2.setColor(Color.gray);
+				g2.setColor(Color.DARK_GRAY);
 	            g2.drawRect(col * cellSize, row * cellSize, cellSize, cellSize);
+	            
+	            // Draw Player
+	            g2.setColor(Color.BLUE);
+	            g2.fillOval((int)(player.x * cellSize - 25), (int)(player.y * cellSize - 25), 50, 50);
+	            
+	            // Player Direction Indicator
+	            g2.drawLine((int)(player.x * cellSize), (int)(player.y * cellSize), 
+	            		(int)((player.x + player.dirX) * cellSize), (int)((player.y + player.dirY) * cellSize));
 			}
 		}
         

@@ -7,11 +7,13 @@ import java.awt.Graphics;
 public class RaycastView extends Canvas {
 	private static final long serialVersionUID = 1L;
 	private int[][] map;
+	private Player player;
 	private int x, y; // Position of view
 	private int width, height; // Size of view
 	
-	public RaycastView(World world, int x, int y, int width, int height) {
+	public RaycastView(World world, Player p, int x, int y, int width, int height) {
 		map = world.getMap();
+		player = p;
 		this.x = x;
 		this.y = y;
 		this.width = width;
