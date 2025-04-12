@@ -37,10 +37,16 @@ public class Game {
 		
 		frame.add(raycastView);
 		frame.add(topdownView);
+		frame.addKeyListener(input);
+		raycastView.setFocusable(false);
+        topdownView.setFocusable(false);
+
 		
 		frame.setUndecorated(true); // No window decorations
 		gd.setFullScreenWindow(frame);
 		frame.setVisible(true);
+		frame.requestFocus();
+
 		
 		frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -57,10 +63,18 @@ public class Game {
             lastTime = now;
 
             // Movement input
-            if (input.isKeyDown(KeyEvent.VK_W)) player.moveForward(deltaTime);
-            if (input.isKeyDown(KeyEvent.VK_S)) player.moveBackward(deltaTime);
-            if (input.isKeyDown(KeyEvent.VK_LEFT)) player.rotateLeft(deltaTime);
-            if (input.isKeyDown(KeyEvent.VK_RIGHT)) player.rotateRight(deltaTime);
+            if (input.isKeyDown(KeyEvent.VK_W)) {
+            	player.moveForward(deltaTime);
+            }
+            if (input.isKeyDown(KeyEvent.VK_S)) {
+            	player.moveBackward(deltaTime);
+            }
+            if (input.isKeyDown(KeyEvent.VK_A)) {
+            	player.rotateLeft(deltaTime);
+            }
+            if (input.isKeyDown(KeyEvent.VK_D)) {
+            	player.rotateRight(deltaTime);
+            }
 
             raycastView.repaint();
             topdownView.repaint();

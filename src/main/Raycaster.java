@@ -21,19 +21,21 @@ public class Raycaster {
 	}
 	
 	public void castRays() {
-<<<<<<< HEAD
 		// Angle of the leftmost ray
 		double startAngle = player.getAngle() - Math.toRadians(rays.length / 2);
 		
 		for (int i = 0; i < rays.length; i++) {
 			double angle = startAngle + Math.toRadians(i);
-			double dx = STEP * Math.cos(angle)
+			double dx = STEP * Math.cos(angle);
 			double dy = STEP * Math.sin(angle);
 			double hitX = player.x;
 			double hitY = player.y;
-		}
-=======
-		
->>>>>>> 61ab9f34e7ea96c9c0e904f4edacbf3e85dc5dde
+			while (hitX > 0 && hitX < map[0].length && hitY > 0 && hitY < map.length
+				&& map[(int)hitY][(int)hitX] == 0) {
+				hitX += dx;
+				hitY += dy;
+			}
+			rays[i] = new Line2D.Double(player.x, player.y, hitX, hitY);
+ 		}
 	}
 }
