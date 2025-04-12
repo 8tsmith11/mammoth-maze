@@ -21,6 +21,7 @@ public class Raycaster {
 	}
 	
 	public void castRays() {
+<<<<<<< HEAD
 		// Angle of the leftmost ray
 		double startAngle = player.getAngle() - Math.toRadians(rays.length / 2);
 		
@@ -31,5 +32,8 @@ public class Raycaster {
 			double hitX = player.x;
 			double hitY = player.y;
 		}
+=======
+		
+>>>>>>> 61ab9f34e7ea96c9c0e904f4edacbf3e85dc5dde
 	}
 }
