@@ -93,5 +93,9 @@ public class Player {
         return map[tileX][tileY] == 0;
     }
 
+    // Return angle in radians
+    public double getAngle() {
+    	return Math.atan(dirY / dirX);
+    }
 
 }
