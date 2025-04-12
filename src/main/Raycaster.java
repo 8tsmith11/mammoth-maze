@@ -7,6 +7,9 @@ public class Raycaster {
 	private int[][] map;
 	private Line2D.Double[] rays;
 	
+	// How much to increment by when checking for collisions
+	private static final double STEP = 0.01;
+	
 	public Raycaster (Player player, int[][] map) {
 		this.player = player;
 		this.map = map;
@@ -18,8 +21,15 @@ public class Raycaster {
 	}
 	
 	public void castRays() {
+		// Angle of the leftmost ray
+		double startAngle = player.getAngle() - Math.toRadians(rays.length / 2);
+		
 		for (int i = 0; i < rays.length; i++) {
-			double angle = 
+			double angle = startAngle + Math.toRadians(i);
+			double dx = STEP * Math.cos(angle)
+			double dy = STEP * Math.sin(angle);
+			double hitX = player.x;
+			double hitY = player.y;
 		}
 	}
 }
