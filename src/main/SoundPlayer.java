@@ -6,46 +6,48 @@ import java.net.*;
 
 
 public class SoundPlayer {
-
+	private long currentFrame = 0L;
+	private Clip clip;
+	private AudioInputStream inputStream;
+	private boolean isPlaying;
 	
-	public void playFootsteps() {
-		playSound("footsteps.wav");
-	}
-	
-	public void playEerie () {
-		playSound("eerie.wav");
-	}
-	
-	public void playSound(String fileName) {
+	public SoundPlayer (String fileName) {
 		try {
 			URL audioUrl = getClass().getClassLoader().getResource("resources/" + fileName);
-			//File audioFile = new File("resources/" + fileName);
-			System.out.println(audioUrl);
-			AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioUrl);
-			
-			Clip clip = AudioSystem.getClip();
-			clip.open(audioStream);
-			clip.start();
-			while (!clip.isRunning()) {
-				Thread.sleep(10);
-			}
-			while (clip.isRunning()) {
-				Thread.sleep(10);
-			}
-			clip.close();
+			this.inputStream = AudioSystem.getAudioInputStream(audioUrl);
+			this.clip = AudioSystem.getClip();
+			this.clip.open(this.inputStream);
 		} catch(Exception e) {
 			System.err.println("Audio file not found.");
 			e.printStackTrace();	
-		}
-
-		
+		}	
 	}
 	
-	public static void main(String[] args) {
-		SoundPlayer s = new SoundPlayer();
-		s.playFootsteps();
-
-
+	public void playSound() {
+		try {
+			if (!this.isPlaying) {
+				this.clip.setMicrosecondPosition(this.currentFrame);
+				this.clip.start();
+				this.isPlaying = true;
+				while(this.clip.isRunning()) {
+					Thread.sleep(10);
+				}
+			}
+		} catch (Exception e) {
+			System.err.println("Audio file not found.");
+			e.printStackTrace();	
+		}
 	}
-
+	
+	public void pause() {
+		this.currentFrame = this.clip.getMicrosecondPosition();
+		this.isPlaying = false;
+		this.clip.stop();
+	}
+	
+	private void resetClip() {
+		if (this.clip.getMicrosecondPosition() >= this.clip.getMicrosecondLength()) {
+			this.clip.setMicrosecondPosition(0);
+		}
+	}
 }
