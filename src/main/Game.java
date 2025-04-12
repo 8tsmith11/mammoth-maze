@@ -19,6 +19,7 @@ public class Game {
 		
 		MazeGen.initMaze();
 		MazeGen.generateMaze(1, 1);
+		MazeGen.setPortal();
 		int[][] map = MazeGen.maze;
 
 		World world = new World(map);
@@ -94,6 +95,7 @@ public class Game {
             if (world.getMap()[(int)player.y][(int)player.x] == 2) {
         		MazeGen.initMaze();
     			MazeGen.generateMaze(1, 1);
+    			MazeGen.setPortal();
     			map = MazeGen.maze;
     			player.x = 1.5;
     			player.y = 1.5;
