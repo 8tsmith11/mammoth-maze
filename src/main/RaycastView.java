@@ -10,8 +10,7 @@ public class RaycastView extends Canvas {
 	private int[][] map;
 	private Player player;
 	private Raycaster rc;
-	private int x, y; // Position of view
-	private int width, height; // Size of view
+
 	
 	public RaycastView(World world, Player p, Raycaster r) {
 		map = world.getMap();

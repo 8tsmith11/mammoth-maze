@@ -32,7 +32,7 @@ public class Game {
 		int height = screenSize.height;
 		RaycastView raycastView = new RaycastView(world, player, raycaster);
 		TopDownView topdownView = new TopDownView(world, player, mammoth, raycaster, 0, 0, width / 
-				2, height);
+				4, height);
 		
 		// Input handler
         InputHandler input = new InputHandler();	
@@ -44,8 +44,8 @@ public class Game {
 		
 		frame.add(raycastView);
 		frame.add(topdownView);
-		topdownView.setBounds(0, 0, width / 2, height);
-        raycastView.setBounds(width / 2, 0, width / 2, height);
+		topdownView.setBounds(0, 0, width / 4, height);
+        raycastView.setBounds(width / 4, 0, 3 * width / 4, height);
 		frame.addKeyListener(input);
 		raycastView.setFocusable(false);
         topdownView.setFocusable(false);

@@ -38,6 +38,8 @@ public class TopDownView extends Canvas {
 			for (int col = 0; col < this.map[row].length; col++) {
 				g2.setColor((this.map[row][col] == 0) ? Color.BLACK : 
 					Color.RED);
+				if (this.map[row][col] == 2)
+					g2.setColor(Color.YELLOW);
 				g2.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
 				
 				// Border around each cell

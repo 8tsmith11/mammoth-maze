@@ -22,9 +22,9 @@ public class Player {
         this.x = 1.5;
         this.y = 1.5;
 
-        // Facing up (north)
-        this.dirX = 0;
-        this.dirY = -1;
+        // Facing down right
+        this.dirX = Math.sqrt(2) / 2;
+        this.dirY = Math.sqrt(2) / 2;
 
         // 2D camera plane for FOV (~66 degrees)
         this.planeX = 0.66;
