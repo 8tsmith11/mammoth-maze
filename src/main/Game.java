@@ -10,22 +10,26 @@ public class Game {
 	
 	public static void main(String[] args) {
 		
-		int[][] map = {
-	            {1, 0, 0, 0},
-	            {1, 0, 1, 0},
-	            {1, 0, 0, 1},
-	            {1, 1, 1, 1}
-	    };
+//		int[][] map = {
+//	            {1, 0, 0, 0},
+//	            {1, 0, 1, 0},
+//	            {1, 0, 0, 1},
+//	            {1, 1, 1, 1}
+//	    };
+		
+		MazeGen.initMaze();
+		MazeGen.generateMaze(1, 1);
+		int[][] map = MazeGen.maze;
 
 		World world = new World(map);
 		Player player = new Player(world);
+		Raycaster raycaster = new Raycaster(player, world.getMap());
 		
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = screenSize.width;
 		int height = screenSize.height;
-		RaycastView raycastView = new RaycastView(world, player, width / 2, 0, width / 
-				2, height);
-		TopDownView topdownView = new TopDownView(world, player, 0, 0, width / 
+		RaycastView raycastView = new RaycastView(world, player, raycaster);
+		TopDownView topdownView = new TopDownView(world, player, raycaster, 0, 0, width / 
 				2, height);
 		
 		// Input handler
@@ -34,9 +38,12 @@ public class Game {
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice gd = ge.getDefaultScreenDevice();
 		Frame frame = new Frame(gd.getDefaultConfiguration());
+		frame.setLayout(null);
 		
 		frame.add(raycastView);
 		frame.add(topdownView);
+		topdownView.setBounds(0, 0, width / 2, height);
+        raycastView.setBounds(width / 2, 0, width / 2, height);
 		frame.addKeyListener(input);
 		raycastView.setFocusable(false);
         topdownView.setFocusable(false);
@@ -61,6 +68,8 @@ public class Game {
             long now = System.nanoTime();
             double deltaTime = (now - lastTime) / 1_000_000_000.0;
             lastTime = now;
+            
+            raycaster.castRays();
 
             // Movement input
             if (input.isKeyDown(KeyEvent.VK_W)) {
@@ -76,8 +85,9 @@ public class Game {
             	player.rotateRight(deltaTime);
             }
 
-            raycastView.repaint();
+            
             topdownView.repaint();
+            raycastView.repaint();
 
             try {
                 Thread.sleep(10);

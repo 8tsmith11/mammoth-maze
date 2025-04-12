@@ -9,8 +9,9 @@ public class Player {
     // Plane vector (camera plane - controls FOV)
     public double planeX, planeY;
     // Movement speed
-    public final double MOVE_SPEED = 3.0; // tiles per second
-    public final double ROTATE_SPEED = 2.0; // radians per second
+    public static final double MOVE_SPEED = 2.0; // tiles per second
+    public static final double ROTATE_SPEED = 4.0; // radians per second
+    public static final double SIZE = 0.5; // size in tiles
 
     private World world;
 
@@ -81,7 +82,7 @@ public class Player {
 
     // Return angle in radians
     public double getAngle() {
-    	return Math.atan(dirY / dirX);
+    	return Math.atan2(dirY, dirX);
     }
 
 

@@ -1,18 +1,21 @@
 package main;
 
 import java.awt.*;
+import java.awt.geom.Line2D;
 
 public class TopDownView extends Canvas {
 	private static final long serialVersionUID = 1L;
 	private int[][] map;
 	private Player player;
+	private Raycaster raycaster;
 	private int x, y; // Position of view
 	private int width, height; // Size of view
 	private Dimension screenSize;
 
-	public TopDownView(World world, Player p, int x, int y, int width, int height) {
+	public TopDownView(World world, Player p, Raycaster r, int x, int y, int width, int height) {
 		map = world.getMap();
 		player = p;
+		raycaster = r;
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -44,10 +47,19 @@ public class TopDownView extends Canvas {
 	            
 			}
 		}
+		
+		// Draw Rays
+		g2.setStroke(new BasicStroke(1));
+		g2.setColor(Color.YELLOW);
+		for (Line2D.Double ray : raycaster.getRays()) {
+			g2.drawLine((int)(ray.x1 * cellSize), (int)(ray.y1 * cellSize), 
+					(int)(ray.x2 * cellSize), (int)(ray.y2 * cellSize));
+		}
 
 		// Draw Player
 		g2.setColor(Color.BLUE);
-		g2.fillOval((int)(player.x * cellSize - 25), (int)(player.y * cellSize - 25), 50, 50);
+		int s = (int) (Player.SIZE * cellSize); // Player size in pixels
+		g2.fillOval((int)(player.x * cellSize - s / 2), (int)(player.y * cellSize - s / 2), s, s);
 		
 		// Player Direction Indicator
 		g2.setStroke(new BasicStroke(10));
