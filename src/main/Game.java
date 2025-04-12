@@ -29,6 +29,8 @@ public class Game {
 		frame.add(topdownView);
 		frame.setUndecorated(true); // No window decorations
 		gd.setFullScreenWindow(frame);
+		frame.setVisible(true);
+
 		
 		frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
