@@ -14,7 +14,7 @@ public class Game {
 	        };
 		World world = new World(map);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		RaycastView raycastView = new RaycastView(world, screenSize.width / 2, 0, screenSize);
+		RaycastView raycastView = new RaycastView(world, screenSize.width / 2, 0, screenSize.width / 2, screenSize.height);
 		
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice gd = ge.getDefaultScreenDevice();
