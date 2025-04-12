@@ -25,8 +25,11 @@ public class RaycastView extends Canvas {
 		Graphics g2 = g.create();
 		g2.translate(x, y);
 		
+		//
 		g2.setColor(Color.RED);
+
 		g2.fillRect(0, 0, width, height);
+
         
         g2.dispose();
 	}

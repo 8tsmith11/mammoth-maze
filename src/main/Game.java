@@ -14,12 +14,18 @@ public class Game {
 	        };
 		World world = new World(map);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		RaycastView raycastView = new RaycastView(world, screenSize.width / 2, 0, screenSize.width / 2, screenSize.height);
+		int width = screenSize.width;
+		int height = screenSize.height;
+		RaycastView raycastView = new RaycastView(world, width / 2, 0, width / 
+				2, height);
+		TopDownView topdownView = new TopDownView(world, 0, 0, width / 
+				2, height);
 		
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice gd = ge.getDefaultScreenDevice();
 		Frame frame = new Frame(gd.getDefaultConfiguration());
 		frame.add(raycastView);
+		frame.add(topdownView);
 		frame.setUndecorated(true); // No window decorations
 		gd.setFullScreenWindow(frame);
 		
