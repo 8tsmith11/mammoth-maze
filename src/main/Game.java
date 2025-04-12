@@ -28,8 +28,7 @@ public class Game {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = screenSize.width;
 		int height = screenSize.height;
-		RaycastView raycastView = new RaycastView(world, player, width / 2, 0, width / 
-				2, height);
+		RaycastView raycastView = new RaycastView(world, player, raycaster);
 		TopDownView topdownView = new TopDownView(world, player, raycaster, 0, 0, width / 
 				2, height);
 		
@@ -39,9 +38,12 @@ public class Game {
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice gd = ge.getDefaultScreenDevice();
 		Frame frame = new Frame(gd.getDefaultConfiguration());
+		frame.setLayout(null);
 		
 		frame.add(raycastView);
 		frame.add(topdownView);
+		topdownView.setBounds(0, 0, width / 2, height);
+        raycastView.setBounds(width / 2, 0, width / 2, height);
 		frame.addKeyListener(input);
 		raycastView.setFocusable(false);
         topdownView.setFocusable(false);
@@ -83,8 +85,9 @@ public class Game {
             	player.rotateRight(deltaTime);
             }
 
-            raycastView.repaint();
+            
             topdownView.repaint();
+            raycastView.repaint();
 
             try {
                 Thread.sleep(10);

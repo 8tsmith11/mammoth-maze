@@ -11,7 +11,7 @@ public class Player {
     // Movement speed
     public static final double MOVE_SPEED = 2.0; // tiles per second
     public static final double ROTATE_SPEED = 4.0; // radians per second
-    public static final double SIZE = 0.3; // size in tiles
+    public static final double SIZE = 0.5; // size in tiles
 
     private World world;
 

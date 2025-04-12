@@ -8,29 +8,19 @@ public class RaycastView extends Canvas {
 	private static final long serialVersionUID = 1L;
 	private int[][] map;
 	private Player player;
+	private Raycaster rc;
 	private int x, y; // Position of view
 	private int width, height; // Size of view
 	
-	public RaycastView(World world, Player p, int x, int y, int width, int height) {
+	public RaycastView(World world, Player p, Raycaster r) {
 		map = world.getMap();
 		player = p;
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
+		this.rc = r;
 	}
 	
 	@Override
 	public void paint(Graphics g) {
-		Graphics g2 = g.create();
-		g2.translate(x, y);
-		
-		//
-		g2.setColor(Color.RED);
-
-		g2.fillRect(0, 0, width, height);
-
-        
-        g2.dispose();
+		g.setColor(Color.RED);
+		g.fillRect(0, 0, getWidth(), getHeight());
 	}
 }
