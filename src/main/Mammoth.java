@@ -21,7 +21,7 @@ public class Mammoth {
 
     private boolean active = true;
     private double respawnTimer = 0;
-    private final double DESPAWN_DURATION = 10.0;
+    private final double DESPAWN_DURATION = 0.0;
     private Random rand = new Random();
 
     public Mammoth(World world, Player player, int startX, int startY) {
@@ -141,7 +141,7 @@ public class Mammoth {
         return path;
     }
 
-    private boolean isVisibleToPlayer(Line2D.Double[] rays) {
+    public boolean isVisibleToPlayer(Line2D.Double[] rays) {
         Rectangle mammothTile = new Rectangle((int)x, (int)y, 1, 1);
         for (Line2D.Double ray : rays) {
             if (mammothTile.intersectsLine(ray)) {

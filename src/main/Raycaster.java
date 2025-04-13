@@ -4,7 +4,6 @@ import java.awt.geom.Line2D;
 
 public class Raycaster {
 	private Player player;
-	private Mammoth mammoth;
 	private int[][] map;
 	private Line2D.Double[] rays;
 	

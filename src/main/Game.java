@@ -32,7 +32,7 @@ public class Game {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = screenSize.width;
 		int height = screenSize.height;
-		RaycastView raycastView = new RaycastView(world, player, raycaster);
+		RaycastView raycastView = new RaycastView(world, player, mammoth, raycaster);
 		TopDownView topdownView = new TopDownView(world, player, mammoth, raycaster, 0, 0, width / 
 				4, height);
 		InfoView infoView = new InfoView();

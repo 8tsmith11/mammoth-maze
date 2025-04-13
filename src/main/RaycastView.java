@@ -14,18 +14,29 @@ public class RaycastView extends Canvas {
 	private static final long serialVersionUID = 1L;
 	private int[][] map;
 	private Player player;
+	private Mammoth mammoth;
 	private Raycaster rc;
+	
 
 	
 	// pranav
 	private BufferedImage portal;
+<<<<<<< HEAD
 //	private BufferedImage brickWall;
+=======
+<<<<<<< HEAD
+	BufferedImage mammothSprite;
+=======
+	private BufferedImage brickWall;
+>>>>>>> cc85e71197db0af58d3f658322d757dc59269566
+>>>>>>> 54ba39173c7fcae9fe76d09b5cee6e29b1958133
 	
 	
-	public RaycastView(World world, Player p, Raycaster r) {
+	public RaycastView(World world, Player p, Mammoth m, Raycaster r) {
 		map = world.getMap();
 		player = p;
 		this.rc = r;
+		mammoth = m;
 		
 		try { 
 			// put in path from git
@@ -34,13 +45,30 @@ public class RaycastView extends Canvas {
 			e.printStackTrace();
 		}
 		
+<<<<<<< HEAD
 //		try { 
 //			// put in path from git
 //			brickWall = ImageIO.read(new File("grey_brick_wall.jpeg"));
 //		} catch (IOException a) {
 //			a.printStackTrace();
 //		}
+=======
+<<<<<<< HEAD
+		try {
+			mammothSprite = ImageIO.read(new File("mammoth.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+=======
+		try { 
+			// put in path from git
+			portal = ImageIO.read(new File("grey_brick_wall.jpeg"));
+		} catch (IOException a) {
+			a.printStackTrace();
+		}
+>>>>>>> 54ba39173c7fcae9fe76d09b5cee6e29b1958133
 		
+>>>>>>> cc85e71197db0af58d3f658322d757dc59269566
 	}
 	
 	@Override
@@ -146,6 +174,54 @@ public class RaycastView extends Canvas {
 				
 		}
 		
-		
+		// Draw Mammoth
+		// Draw Mammoth
+		if (mammoth != null && mammoth.isActive()) {
+		    double dx = mammoth.getX() - player.x;
+		    double dy = mammoth.getY() - player.y;
+
+		    // Enforce tile-centered alignment: snap either horizontally or vertically
+		    double mammothRenderX = mammoth.getX();
+		    double mammothRenderY = mammoth.getY();
+
+		    if (Math.abs(dx) > Math.abs(dy)) {
+		        // Horizontal movement dominant: snap vertically (centered vertically)
+		        mammothRenderY = Math.floor(mammoth.getY()) + 0.5;
+		    } else {
+		        // Vertical movement dominant: snap horizontally (centered horizontally)
+		        mammothRenderX = Math.floor(mammoth.getX()) + 0.5;
+		    }
+
+		    dx = mammothRenderX - player.x;
+		    dy = mammothRenderY - player.y;
+
+		    double dirX = player.dirX;
+		    double dirY = player.dirY;
+		    double planeX = player.planeX;
+		    double planeY = player.planeY;
+
+		    double invDet = 1.0 / (planeX * dirY - dirX * planeY);
+		    double transformX = invDet * (dirY * dx - dirX * dy);
+		    double transformY = invDet * (-planeY * dx + planeX * dy);
+
+		    if (transformY > 0.1) {
+		        int spriteHeight = (int)(getHeight() / transformY);
+		        int spriteWidth = (int)(spriteHeight * 0.75);
+
+		        double screenCenter = (getWidth() / 2.0) * (1 + transformX / transformY);
+		        int drawStartX = (int)Math.round(screenCenter - spriteWidth / 2.0);
+		        int drawStartY = getHeight() / 2 - spriteHeight / 2;
+		        int drawEndY = drawStartY + spriteHeight;
+
+		        // Simple drawImage for clarity
+		        g.drawImage(
+		            mammothSprite,
+		            drawStartX, drawStartY, drawStartX + spriteWidth, drawEndY,
+		            0, 0, mammothSprite.getWidth(), mammothSprite.getHeight(),
+		            null
+		        );
+		    }
+		}
+
 	}
 }
