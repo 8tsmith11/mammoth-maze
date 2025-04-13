@@ -4,7 +4,8 @@
 
 ## 🎮 Gameplay Demo
 
-[![Watch the Demo](/Users/tanishkmodi/Desktop/mammothmaze.png)](https://www.youtube.com/watch?v=x7w1gzq9Fo8)
+[![Watch the Preview](https://github.com/8tsmith11/mammoth-maze/blob/main/mammothmaze.png)](https://www.youtube.com/watch?v=x7w1gzq9Fo8&ab_channel=TanishkModi)
+> Click to watch preview!
 
 ## 🧠 Features
 
