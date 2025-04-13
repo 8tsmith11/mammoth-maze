@@ -33,6 +33,7 @@ public class Game {
 		RaycastView raycastView = new RaycastView(world, player, raycaster);
 		TopDownView topdownView = new TopDownView(world, player, mammoth, raycaster, 0, 0, width / 
 				4, height);
+		InfoView infoView = new InfoView();
 		
 		// Input handler
         InputHandler input = new InputHandler();	
@@ -46,11 +47,14 @@ public class Game {
 		
 		frame.add(raycastView);
 		frame.add(topdownView);
-		topdownView.setBounds(0, 0, width / 4, height);
+		frame.add(infoView);
+		topdownView.setBounds(0, 0, width / 4, width / 4);
         raycastView.setBounds(width / 4, 0, 3 * width / 4, height);
+        infoView.setBounds(0, width / 4, width / 4, 3 * width / 4);
 		frame.addKeyListener(input);
 		raycastView.setFocusable(false);
         topdownView.setFocusable(false);
+        infoView.setFocusable(false);
 
 		
 		frame.setUndecorated(true); // No window decorations
