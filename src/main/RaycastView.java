@@ -19,6 +19,7 @@ public class RaycastView extends Canvas {
 	
 	// pranav
 	private BufferedImage portal;
+	private BufferedImage brickWall;
 	
 	
 	public RaycastView(World world, Player p, Raycaster r) {
@@ -32,6 +33,14 @@ public class RaycastView extends Canvas {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		try { 
+			// put in path from git
+			portal = ImageIO.read(new File("grey_brick_wall.jpeg"));
+		} catch (IOException a) {
+			a.printStackTrace();
+		}
+		
 	}
 	
 	@Override
@@ -68,9 +77,6 @@ public class RaycastView extends Canvas {
 			// Walls get darker with distance
 
 			//pranav
-
-			// Walls get darker with distance
-
 			
 			int mapX = (int)Math.floor(ray.x2);
 			int mapY = (int)Math.floor(ray.y2);
@@ -86,9 +92,10 @@ public class RaycastView extends Canvas {
 				cellType = map[mapY][mapX];
 			}
 			
+			// does ray tracing based on if normal wall or portal
+			
 			if (cellType == 2 && portal != null) {
 				int texWidth = portal.getWidth();
-				int texHeight = portal.getHeight();
 				
 				boolean hitVertical = Math.abs(ray.x2 - ray.x1) > Math.abs(ray.y2 - ray.y1);
 				double wallX;
@@ -105,10 +112,30 @@ public class RaycastView extends Canvas {
 					    texX, 0, texX + 1, portal.getHeight(),
 					    null);
 				
-			} else {
-				g.setColor(new Color(shade, 0, 0));
-				g.fillRect(i * wallWidth, top, wallWidth, wallHeight);
+			} else if (cellType == 1 && brickWall != null) {
+				int texWidth = brickWall.getWidth();
+				
+				boolean hitVertical = Math.abs(ray.x2 - ray.x1) > Math.abs(ray.y2 - ray.y1);
+				double wallX;
+				if (hitVertical) {
+					wallX = ray.y2 - Math.floor(ray.y2); // Vertical wall: use Y
+				} else {
+					wallX = ray.x2 - Math.floor(ray.x2); // Horizontal wall: use X
+				}
+				int texX = (int)(wallX * texWidth);
+				texX = Math.min(Math.max(texX, 0), texWidth - 1);
+				
+				g.drawImage(brickWall,
+					    i * wallWidth, top, i * wallWidth + wallWidth, top + wallHeight,
+					    texX, 0, texX + 1, brickWall.getHeight(),
+					    null);
+				
 			}
+				
+			//g.setColor(new Color(shade, 0, 0));
+			//g.fillRect(i * wallWidth, top, wallWidth, wallHeight);
+				
+				
 		}
 		
 		
