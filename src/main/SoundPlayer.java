@@ -22,13 +22,24 @@ public class SoundPlayer {
 	    }    
 	}
 	
-	public void playSound() {
+	public void loopSound() {
 	    try {
 	        if (!this.isPlaying) {
 	            this.clip.setMicrosecondPosition(this.currentFrame);
 	            clip.loop(Clip.LOOP_CONTINUOUSLY);
 	            this.isPlaying = true;
 	        }
+	    } catch (Exception e) {
+	        System.err.println("Error playing audio.");
+	        e.printStackTrace();
+	    }
+	}
+	
+	public void playSound() {
+	    try {
+	    	// reset audio
+	        clip.setMicrosecondPosition(0); 
+	        clip.start();
 	    } catch (Exception e) {
 	        System.err.println("Error playing audio.");
 	        e.printStackTrace();

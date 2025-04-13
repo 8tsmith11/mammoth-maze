@@ -6,7 +6,7 @@ import java.util.*;
 
 public class Mammoth {
 
-    private double x, y; // tile position
+    public double x, y; // tile position
     private Player player;
     private World world;
     private List<Node> path = new ArrayList<>();
@@ -21,7 +21,7 @@ public class Mammoth {
 
     private boolean active = true;
     private double respawnTimer = 0;
-    private final double DESPAWN_DURATION = 0.0;
+    private final double DESPAWN_DURATION = 10.0;
     private Random rand = new Random();
 
     public Mammoth(World world, Player player, double startX, double startY) {

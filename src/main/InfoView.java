@@ -17,6 +17,10 @@ public class InfoView extends Canvas {
 		level++;
 	}
 	
+	public void reset() {
+		level = 1;
+	}
+	
 	@Override
 	public void paint(Graphics g) {
 		g.setColor(Color.BLACK);

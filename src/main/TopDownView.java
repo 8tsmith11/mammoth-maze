@@ -75,7 +75,7 @@ public class TopDownView extends Canvas {
 		// Draw Mammoth
 		if (mammoth.isActive()) {
 			g2.setColor(Color.WHITE);
-			g2.fillOval((int)(mammoth.getX() * cellSize - s / 2), (int)(mammoth.getY() * cellSize - s / 2), s, s);
+			g2.fillRect((int)(mammoth.getX() * cellSize), (int)(mammoth.getY() * cellSize), cellSize, cellSize);
 		}
         
         g2.dispose();

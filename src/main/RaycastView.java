@@ -35,7 +35,7 @@ public class RaycastView extends Canvas {
 		}
 		
 		try {
-			mammothSprite = ImageIO.read(new File("mammoth.png"));
+			mammothSprite = ImageIO.read(new File("mammoth.jpeg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -71,11 +71,6 @@ public class RaycastView extends Canvas {
 			int wallHeight = (int)(getHeight() / pd); // Height of wall segment in pixels
 			
 			int top = Math.max(0, getHeight() / 2 - wallHeight / 2);
-			
-			// Walls get darker with distance
-
-			//pranav
-			
 			int mapX = (int)Math.floor(ray.x2);
 			int mapY = (int)Math.floor(ray.y2);
 			
@@ -90,9 +85,30 @@ public class RaycastView extends Canvas {
 				cellType = map[mapY][mapX];
 			}
 			
-			// does ray tracing based on if normal wall or portal
+			// Draw Mammoth
+			if (mammoth.isActive() && ray.x2 >= mammoth.getX() - 0.1 && ray.x2 <= mammoth.getX() + 1.1 && 
+					ray.y2 >= mammoth.getY() - 0.1 && ray.y2 <= mammoth.getY() + 1.1) {
+				
+				int texWidth = mammothSprite.getWidth();
+				
+				boolean hitVertical = Math.abs(ray.x2 - ray.x1) > Math.abs(ray.y2 - ray.y1);
+				double wallX;
+				if (hitVertical) {
+					wallX = ray.y2 - Math.floor(ray.y2); // Vertical wall: use Y
+				} else {
+					wallX = ray.x2 - Math.floor(ray.x2); // Horizontal wall: use X
+				}
+				int texX = (int)(wallX * texWidth);
+				texX = Math.min(Math.max(texX, 0), texWidth - 1);
+				
+				g.drawImage(mammothSprite,
+					    i * wallWidth, top, i * wallWidth + wallWidth, top + wallHeight,
+					    texX, 0, texX + 1, mammothSprite.getHeight(),
+					    null);
+			}
 			
-			if (cellType == 2 && portal != null) {
+			// Draw Portal
+			else if (cellType == 2 && portal != null) {
 				int texWidth = portal.getWidth();
 				
 				boolean hitVertical = Math.abs(ray.x2 - ray.x1) > Math.abs(ray.y2 - ray.y1);
@@ -110,88 +126,12 @@ public class RaycastView extends Canvas {
 					    texX, 0, texX + 1, portal.getHeight(),
 					    null);
 				
-			} else {
+			} 
+			// Draw Wall
+			else {
 				g.setColor(new Color(shade, 0, 0));
 				g.fillRect(i * wallWidth, top, wallWidth, wallHeight);
-			}
-			
-			
-			// grey wall implementation (not preferred rn)
-			
-//			else if (cellType == 1 && brickWall != null) {
-//				int texWidth = brickWall.getWidth();
-//				
-//				boolean hitVertical = Math.abs(ray.x2 - ray.x1) > Math.abs(ray.y2 - ray.y1);
-//				double wallX;
-//				if (hitVertical) {
-//					wallX = ray.y2 - Math.floor(ray.y2); // Vertical wall: use Y
-//				} else {
-//					wallX = ray.x2 - Math.floor(ray.x2); // Horizontal wall: use X
-//				}
-//				int texX = (int)(wallX * texWidth);
-//				texX = Math.min(Math.max(texX, 0), texWidth - 1);
-//				
-//				g.drawImage(brickWall,
-//					    i * wallWidth, top, i * wallWidth + wallWidth, top + wallHeight,
-//					    texX, 0, texX + 1, brickWall.getHeight(),
-//					    null);
-//				
-//				
-//			}
-				
-
-				
-				
+			}		
 		}
-		
-		// Draw Mammoth
-		// Draw Mammoth
-		if (mammoth != null && mammoth.isActive()) {
-		    double dx = mammoth.getX() - player.x;
-		    double dy = mammoth.getY() - player.y;
-
-		    // Enforce tile-centered alignment: snap either horizontally or vertically
-		    double mammothRenderX = mammoth.getX();
-		    double mammothRenderY = mammoth.getY();
-
-		    if (Math.abs(dx) > Math.abs(dy)) {
-		        // Horizontal movement dominant: snap vertically (centered vertically)
-		        mammothRenderY = Math.floor(mammoth.getY()) + 0.5;
-		    } else {
-		        // Vertical movement dominant: snap horizontally (centered horizontally)
-		        mammothRenderX = Math.floor(mammoth.getX()) + 0.5;
-		    }
-
-		    dx = mammothRenderX - player.x;
-		    dy = mammothRenderY - player.y;
-
-		    double dirX = player.dirX;
-		    double dirY = player.dirY;
-		    double planeX = player.planeX;
-		    double planeY = player.planeY;
-
-		    double invDet = 1.0 / (planeX * dirY - dirX * planeY);
-		    double transformX = invDet * (dirY * dx - dirX * dy);
-		    double transformY = invDet * (-planeY * dx + planeX * dy);
-
-		    if (transformY > 0.1) {
-		        int spriteHeight = (int)(getHeight() / transformY);
-		        int spriteWidth = (int)(spriteHeight * 0.75);
-
-		        double screenCenter = (getWidth() / 2.0) * (1 + transformX / transformY);
-		        int drawStartX = (int)Math.round(screenCenter - spriteWidth / 2.0);
-		        int drawStartY = getHeight() / 2 - spriteHeight / 2;
-		        int drawEndY = drawStartY + spriteHeight;
-
-		        // Simple drawImage for clarity
-		        g.drawImage(
-		            mammothSprite,
-		            drawStartX, drawStartY, drawStartX + spriteWidth, drawEndY,
-		            0, 0, mammothSprite.getWidth(), mammothSprite.getHeight(),
-		            null
-		        );
-		    }
-		}
-
 	}
 }
