@@ -15,8 +15,7 @@ public class RaycastView extends Canvas {
 	private int[][] map;
 	private Player player;
 	private Raycaster rc;
-	private int x, y; // Position of view
-	private int width, height; // Size of view
+
 	
 	// pranav
 	private BufferedImage portal;
@@ -59,20 +58,25 @@ public class RaycastView extends Canvas {
 					((ray.y2 - ray.y1) * (ray.y2 - ray.y1)));
 			
 			// Perpendicular Distance to correct for fish-eye effect
-			double angle = Math.toRadians(-rays.length / 2 + i);
+			double angle = player.getAngle() - Math.toRadians(rays.length / 2) + Math.toRadians(i);
 			double pd = d * Math.cos(angle - player.getAngle());
 			
-			int wallHeight = (int)(getHeight() / d); // Height of wall segment in pixels
+			int wallHeight = (int)(getHeight() / pd); // Height of wall segment in pixels
 			
 			int top = Math.max(0, getHeight() / 2 - wallHeight / 2);
 			
 			// Walls get darker with distance
+<<<<<<< HEAD
 			int shade = Math.max(0, 255 - (int)(d * 50));
 			
 			//pranav
 			
 			int mapX = (int)Math.floor(ray.x2);
 			int mapY = (int)Math.floor(ray.y2);
+=======
+			int shade = Math.max(0, 255 - (int)(pd * 80));
+			g.setColor(new Color(shade, 0, 0));
+>>>>>>> 664953b1d4166ebe49d98d0f14cf16f00ab18d2c
 
 			
 			int cellType = 0;

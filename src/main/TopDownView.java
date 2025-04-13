@@ -7,15 +7,17 @@ public class TopDownView extends Canvas {
 	private static final long serialVersionUID = 1L;
 	private int[][] map;
 	private Player player;
+	private Mammoth mammoth;
 	private Raycaster raycaster;
 	private int x, y; // Position of view
 	private int width, height; // Size of view
 	private Dimension screenSize;
 
-	public TopDownView(World world, Player p, Raycaster r, int x, int y, int width, int height) {
+	public TopDownView(World world, Player p, Mammoth m, Raycaster r, int x, int y, int width, int height) {
 		map = world.getMap();
 		player = p;
 		raycaster = r;
+		mammoth = m;
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -37,6 +39,8 @@ public class TopDownView extends Canvas {
 			for (int col = 0; col < this.map[row].length; col++) {
 				g2.setColor((this.map[row][col] == 0) ? Color.BLACK : 
 					Color.RED);
+				if (this.map[row][col] == 2)
+					g2.setColor(Color.YELLOW);
 				g2.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
 				
 				// Border around each cell
@@ -61,10 +65,18 @@ public class TopDownView extends Canvas {
 		int s = (int) (Player.SIZE * cellSize); // Player size in pixels
 		g2.fillOval((int)(player.x * cellSize - s / 2), (int)(player.y * cellSize - s / 2), s, s);
 		
+		
+		
 		// Player Direction Indicator
 		g2.setStroke(new BasicStroke(10));
 		g2.drawLine((int)(player.x * cellSize), (int)(player.y * cellSize), 
 				(int)((player.x + player.dirX / 4) * cellSize), (int)((player.y + player.dirY / 4) * cellSize));
+		
+		// Draw Mammoth
+		if (mammoth.isActive()) {
+			g2.setColor(Color.WHITE);
+			g2.fillOval((int)(mammoth.getX() * cellSize - s / 2), (int)(mammoth.getY() * cellSize - s / 2), s, s);
+		}
         
         g2.dispose();
 	}
