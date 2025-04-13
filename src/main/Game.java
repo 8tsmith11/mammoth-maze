@@ -22,6 +22,7 @@ public class Game {
 		MazeGen.generateMaze(1, 1);
 		MazeGen.setPortal();
 		int[][] map = MazeGen.maze;
+		map[1][0] = 2;
 
 		World world = new World(map);
 		Player player = new Player(world);
@@ -118,7 +119,6 @@ public class Game {
             }
             
 
-            // pranav
             if (world.getMap()[(int)player.y][(int)player.x] == 2) {
         		MazeGen.initMaze();
     			MazeGen.generateMaze(1, 1);

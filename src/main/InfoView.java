@@ -35,7 +35,7 @@ public class InfoView extends Canvas {
 	    g.drawString(text, x, y);
 	    
 	    font = new Font("Papyrus", Font.BOLD, 24);
-	    text = "'WASD' to Move";
+	    text = "'WASD' to Move.";
 	    g.setFont(font);
 	    fm = g.getFontMetrics();
 
@@ -44,6 +44,14 @@ public class InfoView extends Canvas {
 	    g.drawString(text, x, y);
 	    
 	    text = "Find the exit.";
+	    g.setFont(font);
+	    fm = g.getFontMetrics();
+
+	    x = (getWidth() - fm.stringWidth(text)) / 2;
+	    y += getHeight() / 10;
+	    g.drawString(text, x, y);
+	    
+	    text = "Turn your sound on.";
 	    g.setFont(font);
 	    fm = g.getFontMetrics();
 
