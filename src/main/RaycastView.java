@@ -69,9 +69,12 @@ public class RaycastView extends Canvas {
 			
 =======
 			// Walls get darker with distance
+<<<<<<< HEAD
 
 			int shade = Math.max(0, 255 - (int)(d * 50));
 >>>>>>> efbdcb7edf78557c933082fdea33332702effa54
+=======
+>>>>>>> 50244f202b3a415fe5a9e577651a3f199bd50c15
 			
 			//pranav
 			
