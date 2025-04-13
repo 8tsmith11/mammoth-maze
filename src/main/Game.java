@@ -106,6 +106,17 @@ public class Game {
             
             topdownView.repaint();
             raycastView.repaint();
+            
+            
+            if (world.getMap()[(int)player.y][(int)player.x] == 
+            		world.getMap()[(int)mammoth.getY()][(int)mammoth.getX()]) {
+            	// change later to new mammoth image
+        		// GameOver.showImage("", 500, 500);
+            	
+    			// edit game over to have an option to go back to game
+        		// by hitting space
+            }
+            
 
             // pranav
             if (world.getMap()[(int)player.y][(int)player.x] == 2) {
