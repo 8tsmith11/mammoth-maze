@@ -16,6 +16,7 @@ public class Game {
 //	            {1, 0, 0, 1},
 //	            {1, 1, 1, 1}
 //	    };
+
 		
 		MazeGen.initMaze();
 		MazeGen.generateMaze(1, 1);
@@ -68,6 +69,8 @@ public class Game {
                 System.exit(0);
             }
         });
+		
+		// load in the level screen showing level 1 and controls
 
 
 		// MAIN GAME LOOP
@@ -112,6 +115,7 @@ public class Game {
     			map = MazeGen.maze;
     			player.x = 1.5;
     			player.y = 1.5;
+    			
             }
             
             try {
