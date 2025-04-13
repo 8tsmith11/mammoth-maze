@@ -65,26 +65,15 @@ public class RaycastView extends Canvas {
 			
 			int top = Math.max(0, getHeight() / 2 - wallHeight / 2);
 			
-<<<<<<< HEAD
-			
-=======
 			// Walls get darker with distance
-<<<<<<< HEAD
 
-			int shade = Math.max(0, 255 - (int)(d * 50));
->>>>>>> efbdcb7edf78557c933082fdea33332702effa54
-=======
->>>>>>> 50244f202b3a415fe5a9e577651a3f199bd50c15
-			
 			//pranav
 			
 			int mapX = (int)Math.floor(ray.x2);
 			int mapY = (int)Math.floor(ray.y2);
-<<<<<<< HEAD
-			// Walls get darker with distance
-=======
 
->>>>>>> efbdcb7edf78557c933082fdea33332702effa54
+			// Walls get darker with distance
+
 			int shade = Math.max(0, 255 - (int)(pd * 80));
 			g.setColor(new Color(shade, 0, 0));
 
