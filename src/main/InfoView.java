@@ -13,8 +13,8 @@ public class InfoView extends Canvas {
 		level = 1;
 	}
 	
-	public void updateLevel(int level) {
-		this.level = level;
+	public void incrementLevel() {
+		level++;
 	}
 	
 	@Override

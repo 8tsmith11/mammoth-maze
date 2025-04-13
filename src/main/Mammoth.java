@@ -24,11 +24,11 @@ public class Mammoth {
     private final double DESPAWN_DURATION = 0.0;
     private Random rand = new Random();
 
-    public Mammoth(World world, Player player, int startX, int startY) {
+    public Mammoth(World world, Player player, double startX, double startY) {
         this.world = world;
         this.player = player;
-        this.x = startX + 0.5;
-        this.y = startY + 0.5;
+        this.x = startX;
+        this.y = startY;
     }
 
     public void update(double deltaTime, Line2D.Double[] rays) {
@@ -56,8 +56,8 @@ public class Mammoth {
             path = findPath((int)x, (int)y, playerX, playerY);
             if (path != null && path.size() > 1) {
                 Node next = path.get(1);
-                targetX = next.x + 0.5;  
-                targetY = next.y + 0.5;
+                targetX = (double)next.x;  
+                targetY = (double)next.y;
             }
             moveCooldown = MOVE_DELAY;
         }

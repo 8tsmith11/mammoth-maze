@@ -16,20 +16,9 @@ public class RaycastView extends Canvas {
 	private Player player;
 	private Mammoth mammoth;
 	private Raycaster rc;
-	
 
-	
-	// pranav
 	private BufferedImage portal;
-<<<<<<< HEAD
-//	private BufferedImage brickWall;
-=======
-<<<<<<< HEAD
-	BufferedImage mammothSprite;
-=======
-	private BufferedImage brickWall;
->>>>>>> cc85e71197db0af58d3f658322d757dc59269566
->>>>>>> 54ba39173c7fcae9fe76d09b5cee6e29b1958133
+	private BufferedImage mammothSprite;
 	
 	
 	public RaycastView(World world, Player p, Mammoth m, Raycaster r) {
@@ -45,30 +34,11 @@ public class RaycastView extends Canvas {
 			e.printStackTrace();
 		}
 		
-<<<<<<< HEAD
-//		try { 
-//			// put in path from git
-//			brickWall = ImageIO.read(new File("grey_brick_wall.jpeg"));
-//		} catch (IOException a) {
-//			a.printStackTrace();
-//		}
-=======
-<<<<<<< HEAD
 		try {
 			mammothSprite = ImageIO.read(new File("mammoth.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-=======
-		try { 
-			// put in path from git
-			portal = ImageIO.read(new File("grey_brick_wall.jpeg"));
-		} catch (IOException a) {
-			a.printStackTrace();
-		}
->>>>>>> 54ba39173c7fcae9fe76d09b5cee6e29b1958133
-		
->>>>>>> cc85e71197db0af58d3f658322d757dc59269566
 	}
 	
 	@Override

@@ -10,19 +10,11 @@ public class Game {
 	
 	public static void main(String[] args) {
 		
-//		int[][] map = {
-//	            {1, 0, 0, 0},
-//	            {1, 0, 1, 0},
-//	            {1, 0, 0, 1},
-//	            {1, 1, 1, 1}
-//	    };
-
-		
+		// Initialize maze 
 		MazeGen.initMaze();
 		MazeGen.generateMaze(1, 1);
 		MazeGen.setPortal();
 		int[][] map = MazeGen.maze;
-		map[1][0] = 2;
 
 		World world = new World(map);
 		Player player = new Player(world);
@@ -119,6 +111,7 @@ public class Game {
             }
             
 
+            // Go to next level when player reaches portal
             if (world.getMap()[(int)player.y][(int)player.x] == 2) {
         		MazeGen.initMaze();
     			MazeGen.generateMaze(1, 1);
@@ -126,7 +119,8 @@ public class Game {
     			map = MazeGen.maze;
     			player.x = 1.5;
     			player.y = 1.5;
-    			
+    			infoView.incrementLevel();
+    			infoView.repaint();
             }
             
             try {

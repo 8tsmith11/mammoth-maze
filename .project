@@ -14,30 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-<<<<<<< HEAD
-=======
-	<linkedResources>
-		<link>
-			<name>src/footsteps.wav</name>
-			<type>1</type>
-			<location>C:/Users/iasbn/OneDrive/Documents/Audacity/footsteps.wav</location>
-		</link>
-		<link>
-			<name>src/impact.wav</name>
-			<type>1</type>
-			<location>C:/Users/iasbn/OneDrive/Documents/Audacity/impact.wav</location>
-		</link>
-	</linkedResources>
->>>>>>> f758980d6e4baf96eb7321d9c78164dd2ecab08e
-	<filteredResources>
-		<filter>
-			<id>1744430091190</id>
-			<name></name>
-			<type>30</type>
-			<matcher>
-				<id>org.eclipse.core.resources.regexFilterMatcher</id>
-				<arguments>node_modules|\.git|__CREATED_BY_JAVA_LANGUAGE_SERVER__</arguments>
-			</matcher>
-		</filter>
-	</filteredResources>
 </projectDescription>
