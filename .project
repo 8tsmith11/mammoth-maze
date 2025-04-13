@@ -16,14 +16,14 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>src/resources/footsteps.wav</name>
+			<name>src/footsteps.wav</name>
 			<type>1</type>
-			<location>C:/Users/iasbn/OneDrive/Documents/Audacity/person-running-loop-245173.wav</location>
+			<location>C:/Users/iasbn/OneDrive/Documents/Audacity/footsteps.wav</location>
 		</link>
 		<link>
-			<name>src/resources/impact.wav</name>
+			<name>src/impact.wav</name>
 			<type>1</type>
-			<location>C:/Users/iasbn/OneDrive/Documents/Audacity/halloween-impact-05-93808.wav</location>
+			<location>C:/Users/iasbn/OneDrive/Documents/Audacity/impact.wav</location>
 		</link>
 	</linkedResources>
 	<filteredResources>
