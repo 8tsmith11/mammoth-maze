@@ -28,7 +28,7 @@ public class RaycastView extends Canvas {
 		
 		try { 
 			// put in path from git
-			portal = ImageIO.read(new File("textures/wall.jpg"));
+			portal = ImageIO.read(new File("yugioh_portal.jpeg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -64,27 +64,12 @@ public class RaycastView extends Canvas {
 			int wallHeight = (int)(getHeight() / pd); // Height of wall segment in pixels
 			
 			int top = Math.max(0, getHeight() / 2 - wallHeight / 2);
-			
-<<<<<<< HEAD
-			
-=======
-			// Walls get darker with distance
-<<<<<<< HEAD
 
-			int shade = Math.max(0, 255 - (int)(d * 50));
->>>>>>> efbdcb7edf78557c933082fdea33332702effa54
-=======
->>>>>>> 50244f202b3a415fe5a9e577651a3f199bd50c15
-			
-			//pranav
 			
 			int mapX = (int)Math.floor(ray.x2);
 			int mapY = (int)Math.floor(ray.y2);
-<<<<<<< HEAD
+			
 			// Walls get darker with distance
-=======
-
->>>>>>> efbdcb7edf78557c933082fdea33332702effa54
 			int shade = Math.max(0, 255 - (int)(pd * 80));
 			g.setColor(new Color(shade, 0, 0));
 
@@ -99,27 +84,20 @@ public class RaycastView extends Canvas {
 				int texWidth = portal.getWidth();
 				int texHeight = portal.getHeight();
 				
-				double wallX = ray.x2 - Math.floor(ray.x2);
+				boolean hitVertical = Math.abs(ray.x2 - ray.x1) > Math.abs(ray.y2 - ray.y1);
+				double wallX;
+				if (hitVertical) {
+					wallX = ray.y2 - Math.floor(ray.y2); // Vertical wall: use Y
+				} else {
+					wallX = ray.x2 - Math.floor(ray.x2); // Horizontal wall: use X
+				}
 				int texX = (int)(wallX * texWidth);
 				texX = Math.min(Math.max(texX, 0), texWidth - 1);
 				
-				for (int y = 0; y < wallHeight; y++) {
-					int texY = (int)(((double) y / wallHeight) * texHeight);
-					texY = Math.min(Math.max(texX, 0), texWidth - 1);
-					
-					int color = portal.getRGB(texX, texY);
-					
-					// darken based on distance
-					int r = ((color >> 16) & 0xFF) * shade / 255;
-					int gCol = ((color >> 8) & 0xFF) * shade / 255;
-					int b = (color & 0xFF) * shade / 255;
-				
-					g.setColor(new Color(r, gCol, b));
-					g.fillRect(i * wallWidth, top + y, 
-							i * wallWidth + wallWidth - 1, 
-							top + y);
-					
-				}
+				g.drawImage(portal,
+					    i * wallWidth, top, i * wallWidth + wallWidth, top + wallHeight,
+					    texX, 0, texX + 1, portal.getHeight(),
+					    null);
 				
 			} else {
 				g.setColor(new Color(shade, 0, 0));
