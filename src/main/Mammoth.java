@@ -6,13 +6,18 @@ import java.util.*;
 
 public class Mammoth {
 
-    private int x, y; // tile position
+    private double x, y; // tile position
     private Player player;
     private World world;
     private List<Node> path = new ArrayList<>();
 
     private double moveCooldown = 0;
-    private final double MOVE_DELAY = 0.25; // seconds between steps
+    private final double MOVE_DELAY = 0.25; // seconds between path recalcs
+    
+    // target positions for interpolation
+    private Double targetX = null, targetY = null;
+    // Speed in tiles per second
+    private double speed = 3.0; 
 
     private boolean active = true;
     private double respawnTimer = 0;
@@ -22,11 +27,11 @@ public class Mammoth {
     public Mammoth(World world, Player player, int startX, int startY) {
         this.world = world;
         this.player = player;
-        this.x = startX;
-        this.y = startY;
+        this.x = startX + 0.5;
+        this.y = startY + 0.5;
     }
 
-    public void update(double deltaTime, List<Line2D.Double> rays) {
+    public void update(double deltaTime, Line2D.Double[] rays) {
         if (!active) {
             respawnTimer -= deltaTime;
             if (respawnTimer <= 0) {
@@ -45,20 +50,32 @@ public class Mammoth {
         }
 
         moveCooldown -= deltaTime;
-        if (moveCooldown <= 0) {
+        if (moveCooldown <= 0 && (targetX == null || targetY == null)) {
             int playerX = (int) player.getX();
             int playerY = (int) player.getY();
-            path = findPath(x, y, playerX, playerY);
-            moveAlongPath();
+            path = findPath((int)x, (int)y, playerX, playerY);
+            if (path != null && path.size() > 1) {
+                Node next = path.get(1);
+                targetX = next.x + 0.5;  
+                targetY = next.y + 0.5;
+            }
             moveCooldown = MOVE_DELAY;
         }
-    }
-
-    private void moveAlongPath() {
-        if (path != null && path.size() > 1) {
-            Node next = path.get(1); // index 0 is current position
-            this.x = next.x;
-            this.y = next.y;
+        
+        if (targetX != null && targetY != null) {
+            double dx = targetX - x;
+            double dy = targetY - y;
+            double dist = Math.hypot(dx, dy);
+            if (dist < 0.05) { // target reached
+                x = targetX;
+                y = targetY;
+                targetX = null;
+                targetY = null;
+            } else {
+                double moveDist = Math.min(speed * deltaTime, dist);
+                x += (dx / dist) * moveDist;
+                y += (dy / dist) * moveDist;
+            }
         }
     }
 
@@ -87,7 +104,7 @@ public class Mammoth {
                 int nx = current.x + dir[0];
                 int ny = current.y + dir[1];
 
-                if (nx < 0 || ny < 0 || nx >= rows || ny >= cols || map[nx][ny] != 0) continue;
+                if (nx < 0 || ny < 0 || nx >= rows || ny >= cols || map[ny][nx] != 0) continue;
 
                 String key = nx + "," + ny;
                 if (closed.contains(key)) continue;
@@ -124,8 +141,8 @@ public class Mammoth {
         return path;
     }
 
-    private boolean isVisibleToPlayer(List<Line2D.Double> rays) {
-        Rectangle mammothTile = new Rectangle(x, y, 1, 1);
+    private boolean isVisibleToPlayer(Line2D.Double[] rays) {
+        Rectangle mammothTile = new Rectangle((int)x, (int)y, 1, 1);
         for (Line2D.Double ray : rays) {
             if (mammothTile.intersectsLine(ray)) {
                 return true;
@@ -142,11 +159,11 @@ public class Mammoth {
         return ((int) player.getX() == x && (int) player.getY() == y);
     }
 
-    public int getX(){
+    public double getX(){
         return x;
     }
 
-    public int getY(){
+    public double getY(){
         return y;
     }
 
