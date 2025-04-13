@@ -75,6 +75,7 @@ public class Game {
             
             raycaster.castRays();
             mammoth.update(deltaTime, raycaster.getRays());
+            footstepSound.resetClip();
 
             // Movement input
             if (input.isKeyDown(KeyEvent.VK_W)) {

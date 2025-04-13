@@ -26,7 +26,7 @@ public class SoundPlayer {
 	    try {
 	        if (!this.isPlaying) {
 	            this.clip.setMicrosecondPosition(this.currentFrame);
-	            this.clip.start();
+	            clip.loop(Clip.LOOP_CONTINUOUSLY);
 	            this.isPlaying = true;
 	        }
 	    } catch (Exception e) {
@@ -41,7 +41,7 @@ public class SoundPlayer {
 		this.clip.stop();
 	}
 	
-	private void resetClip() {
+	public void resetClip() {
 		if (this.clip.getMicrosecondPosition() >= this.clip.getMicrosecondLength()) {
 			this.clip.setMicrosecondPosition(0);
 		}
