@@ -37,8 +37,8 @@ public class Game {
 		// Input handler
         InputHandler input = new InputHandler();	
 
-		//SoundPlayer footstepSound = new SoundPlayer("footsteps.wav");
-		//SoundPlayer impactSound = new SoundPlayer("impact.wav");
+		SoundPlayer footstepSound = new SoundPlayer("footsteps.wav");
+		SoundPlayer impactSound = new SoundPlayer("impact.wav");
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice gd = ge.getDefaultScreenDevice();
 		Frame frame = new Frame(gd.getDefaultConfiguration());
@@ -79,11 +79,11 @@ public class Game {
             // Movement input
             if (input.isKeyDown(KeyEvent.VK_W)) {
             	player.moveForward(deltaTime);
-            	//footstepSound.playSound();
+            	footstepSound.playSound();
             }
             if (input.isKeyDown(KeyEvent.VK_S)) {
             	player.moveBackward(deltaTime);
-            	//footstepSound.playSound();
+            	footstepSound.playSound();
             }
             if (input.isKeyDown(KeyEvent.VK_A)) {
             	player.rotateLeft(deltaTime);
@@ -92,7 +92,7 @@ public class Game {
             	player.rotateRight(deltaTime);
             }
             if (!(input.isKeyDown(KeyEvent.VK_W) || input.isKeyDown(KeyEvent.VK_S))) {
-            	//footstepSound.pause();
+            	footstepSound.pause();
             }
 
             
