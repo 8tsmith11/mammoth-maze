@@ -4,7 +4,6 @@ import javax.sound.sampled.*;
 import java.io.*;
 import java.net.*;
 
-
 public class SoundPlayer {
 	private long currentFrame = 0L;
 	private Clip clip;
@@ -13,7 +12,8 @@ public class SoundPlayer {
 	
 	public SoundPlayer (String fileName) {
 		try {
-			URL audioUrl = getClass().getClassLoader().getResource("resources/" + fileName);
+			System.out.println(fileName);
+			URL audioUrl = getClass().getClassLoader().getResource(fileName);
 			this.inputStream = AudioSystem.getAudioInputStream(audioUrl);
 			this.clip = AudioSystem.getClip();
 			this.clip.open(this.inputStream);
