@@ -51,7 +51,7 @@ public class Game {
 		frame.add(infoView);
 		topdownView.setBounds(0, 0, width / 4, width / 4);
         raycastView.setBounds(width / 4, 0, 3 * width / 4, height);
-        infoView.setBounds(0, width / 4, width / 4, 3 * width / 4);
+        infoView.setBounds(0, width / 4, width / 4, height - width / 4);
 		frame.addKeyListener(input);
 		raycastView.setFocusable(false);
         topdownView.setFocusable(false);
